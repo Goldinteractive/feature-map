@@ -6,7 +6,7 @@ var cachedIcons = {}
 /**
  * Map feature class.
  */
-class Map extends base.features.Feature {
+class GoogleMap extends base.features.Feature {
 
   init() {
 
@@ -324,7 +324,7 @@ class Map extends base.features.Feature {
  * @property {Object} mapOptions
  *   Google Map API options for map instance.
  */
-Map.defaultOptions = {
+GoogleMap.defaultOptions = {
   theme: 'default',
   markers: [],
   boundMarkers: [],
@@ -341,7 +341,7 @@ Map.defaultOptions = {
   }
 }
 
-Map.defaultMarkerOptions = {
+GoogleMap.defaultMarkerOptions = {
   content: null,
   panTo: false,
   scaleIcon: 0.5,
@@ -351,4 +351,4 @@ Map.defaultMarkerOptions = {
   }
 }
 
-export default Map
+export default GoogleMap
