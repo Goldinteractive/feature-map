@@ -106,7 +106,7 @@ class GoogleMap extends base.features.Feature {
     var iconUrl
 
     // extend Google API marker options
-    markerOptions = Object.assign({}, GoogleMap.defaultMarkerOptions.markerOptions, options.markerOptions)
+    markerOptions = Object.assign({}, GoogleMap.defaultMarkerOptions.markerOptions, options.markerOptions || {})
 
     // extend marker options
     options = Object.assign({}, GoogleMap.defaultMarkerOptions, options)
