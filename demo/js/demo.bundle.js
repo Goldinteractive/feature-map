@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -5149,7 +5149,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(4);
+__webpack_require__(5);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
@@ -5160,7 +5160,7 @@ exports.clearImmediate = clearImmediate;
 
 /* WEBPACK VAR INJECTION */(function(base) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -5268,16 +5268,16 @@ exports.clearImmediate = clearImmediate;
    * Map feature class.
    */
 
-  var Map = function (_base$features$Featur) {
-    _inherits(Map, _base$features$Featur);
+  var GoogleMap = function (_base$features$Featur) {
+    _inherits(GoogleMap, _base$features$Featur);
 
-    function Map() {
-      _classCallCheck(this, Map);
+    function GoogleMap() {
+      _classCallCheck(this, GoogleMap);
 
-      return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (GoogleMap.__proto__ || Object.getPrototypeOf(GoogleMap)).apply(this, arguments));
     }
 
-    _createClass(Map, [{
+    _createClass(GoogleMap, [{
       key: 'init',
       value: function init() {
         var _this2 = this;
@@ -5323,7 +5323,7 @@ exports.clearImmediate = clearImmediate;
     }, {
       key: 'destroy',
       value: function destroy() {
-        _get(Map.prototype.__proto__ || Object.getPrototypeOf(Map.prototype), 'destroy', this).call(this);
+        _get(GoogleMap.prototype.__proto__ || Object.getPrototypeOf(GoogleMap.prototype), 'destroy', this).call(this);
         google.maps.event.clearInstanceListeners(this.map);
       }
     }, {
@@ -5342,7 +5342,7 @@ exports.clearImmediate = clearImmediate;
                 _this3.map.setZoom(_this3.options.geolocationControlZoom);
               }
             } else {
-              var error = error.message || error;
+              error = error.message || error;
               if (error != null) {
                 console.error('Failed to detect user location: ' + error);
               } else {
@@ -5378,10 +5378,10 @@ exports.clearImmediate = clearImmediate;
         var iconUrl;
 
         // extend Google API marker options
-        markerOptions = Object.assign({}, Map.defaultMarkerOptions.markerOptions, options.markerOptions);
+        markerOptions = Object.assign({}, GoogleMap.defaultMarkerOptions.markerOptions, options.markerOptions);
 
         // extend marker options
-        options = Object.assign({}, Map.defaultMarkerOptions, options);
+        options = Object.assign({}, GoogleMap.defaultMarkerOptions, options);
 
         // set map the marker belongs to
         markerOptions.map = this.map;
@@ -5598,7 +5598,7 @@ exports.clearImmediate = clearImmediate;
       }
     }]);
 
-    return Map;
+    return GoogleMap;
   }(base.features.Feature);
 
   /**
@@ -5618,7 +5618,7 @@ exports.clearImmediate = clearImmediate;
    * @property {Object} mapOptions
    *   Google Map API options for map instance.
    */
-  Map.defaultOptions = {
+  GoogleMap.defaultOptions = {
     theme: 'default',
     markers: [],
     boundMarkers: [],
@@ -5635,7 +5635,7 @@ exports.clearImmediate = clearImmediate;
     }
   };
 
-  Map.defaultMarkerOptions = {
+  GoogleMap.defaultMarkerOptions = {
     content: null,
     panTo: false,
     scaleIcon: 0.5,
@@ -5645,12 +5645,161 @@ exports.clearImmediate = clearImmediate;
     }
   };
 
-  exports.default = Map;
+  exports.default = GoogleMap;
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.geolocation = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  var GeolocationControl = function () {
+    function GeolocationControl(map) {
+      var _this = this;
+
+      var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      _classCallCheck(this, GeolocationControl);
+
+      if (!navigator.geolocation) return;
+
+      position = position || google.maps.ControlPosition.RIGHT_BOTTOM;
+
+      this.userLocation = this.getSavedUserLocation();
+      this.map = map;
+
+      this.$icon = document.createElement('div');
+      this.$icon.className = 'geolocation-control-icon';
+
+      this.$element = document.createElement('div');
+      this.$element.className = 'geolocation-control';
+      this.$element.classList.toggle('-active', !!this.userLocation);
+
+      this.$element.appendChild(this.$icon);
+
+      google.maps.event.addDomListener(this.$element, 'click', function (e) {
+        e.preventDefault();
+        _this.$element.classList.add('-pending');
+
+        _this.getUserLocation(function (success, position, error) {
+          _this.$element.classList.remove('-pending');
+
+          if (success) {
+            _this.$element.classList.add('-active');
+          }
+
+          if (callback) {
+            callback(success, position, error);
+          }
+        });
+      }, false);
+
+      this.map.controls[position].push(this.$element);
+    }
+
+    _createClass(GeolocationControl, [{
+      key: 'hide',
+      value: function hide() {
+        this.$element.style.display = 'none';
+      }
+    }, {
+      key: 'show',
+      value: function show() {
+        this.$element.style.display = 'block';
+      }
+    }, {
+      key: 'getSavedUserLocation',
+      value: function getSavedUserLocation() {
+        var location = window.sessionStorage.getItem('gmap-user-location');
+        if (!location) return null;
+
+        var position = location.split(',');
+
+        return new google.maps.LatLng(parseFloat(position[0]), parseFloat(position[1]));
+      }
+    }, {
+      key: 'getUserLocation',
+      value: function getUserLocation(cb) {
+        var _this2 = this;
+
+        if (this.userLocation) {
+          cb(true, this.userLocation, null);
+          return true;
+        }
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (geolocation) {
+            var position = new google.maps.LatLng(geolocation.coords.latitude, geolocation.coords.longitude);
+
+            _this2.userLocation = position;
+
+            window.sessionStorage.setItem('gmap-user-location', position.lat() + ',' + position.lng());
+
+            cb(true, position);
+          }, function (err) {
+            cb(false, null, err);
+          });
+        } else {
+          cb(false, null, 'Browser doesn\'t support geocoding');
+        }
+      }
+    }]);
+
+    return GeolocationControl;
+  }();
+
+  exports.default = GeolocationControl;
+});
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -5836,7 +5985,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -6026,10 +6175,10 @@ process.umask = function() { return 0; };
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(4)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 var g;
@@ -6056,7 +6205,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(base) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
@@ -6101,155 +6250,6 @@ module.exports = g;
   base.features.init();
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if (typeof exports !== "undefined") {
-    factory(exports);
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports);
-    global.geolocation = mod.exports;
-  }
-})(this, function (exports) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
-
-  var GeolocationControl = function () {
-    function GeolocationControl(map) {
-      var _this = this;
-
-      var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-      _classCallCheck(this, GeolocationControl);
-
-      if (!navigator.geolocation) return;
-
-      position = position || google.maps.ControlPosition.RIGHT_BOTTOM;
-
-      this.userLocation = this.getSavedUserLocation();
-      this.map = map;
-
-      this.$icon = document.createElement('div');
-      this.$icon.className = 'geolocation-control-icon';
-
-      this.$element = document.createElement('div');
-      this.$element.className = 'geolocation-control';
-      this.$element.classList.toggle('-active', !!this.userLocation);
-
-      this.$element.appendChild(this.$icon);
-
-      google.maps.event.addDomListener(this.$element, 'click', function (e) {
-        e.preventDefault();
-        _this.$element.classList.add('-pending');
-
-        _this.getUserLocation(function (success, position, error) {
-          _this.$element.classList.remove('-pending');
-
-          if (success) {
-            _this.$element.classList.add('-active');
-          }
-
-          if (callback) {
-            callback(success, position, error);
-          }
-        });
-      }, false);
-
-      this.map.controls[position].push(this.$element);
-    }
-
-    _createClass(GeolocationControl, [{
-      key: 'hide',
-      value: function hide() {
-        this.$element.style.display = 'none';
-      }
-    }, {
-      key: 'show',
-      value: function show() {
-        this.$element.style.display = 'block';
-      }
-    }, {
-      key: 'getSavedUserLocation',
-      value: function getSavedUserLocation() {
-        var location = window.sessionStorage.getItem('gmap-user-location');
-        if (!location) return null;
-
-        var position = location.split(',');
-
-        return new google.maps.LatLng(parseFloat(position[0]), parseFloat(position[1]));
-      }
-    }, {
-      key: 'getUserLocation',
-      value: function getUserLocation(cb) {
-        var _this2 = this;
-
-        if (this.userLocation) {
-          cb(true, this.userLocation, null);
-          return true;
-        }
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function (geolocation) {
-            var position = new google.maps.LatLng(geolocation.coords.latitude, geolocation.coords.longitude);
-
-            _this2.userLocation = position;
-
-            window.sessionStorage.setItem('gmap-user-location', position.lat() + ',' + position.lng());
-
-            cb(true, position);
-          }, function (err) {
-            cb(false, null, err);
-          });
-        } else {
-          cb(false, null, 'Browser doesn\'t support geocoding');
-        }
-      }
-    }]);
-
-    return GeolocationControl;
-  }();
-
-  exports.default = GeolocationControl;
-});
 
 /***/ })
 /******/ ]);
