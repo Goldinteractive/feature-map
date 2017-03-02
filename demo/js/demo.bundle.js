@@ -5282,8 +5282,6 @@ exports.clearImmediate = clearImmediate;
       value: function init() {
         var _this2 = this;
 
-        window.test = this;
-
         this.isResizing = false;
 
         this.markers = [];
@@ -5326,8 +5324,8 @@ exports.clearImmediate = clearImmediate;
       key: 'destroy',
       value: function destroy() {
         this.node.innerHTML = '';
-        this.map = null;
         google.maps.event.clearInstanceListeners(this.map);
+        this.map = null;
 
         _get(GoogleMap.prototype.__proto__ || Object.getPrototypeOf(GoogleMap.prototype), 'destroy', this).call(this);
       }
@@ -5369,7 +5367,7 @@ exports.clearImmediate = clearImmediate;
 
         this.listenerZoomChanged = google.maps.event.addDomListener(this.map, 'zoom_changed', this._zoomChangedListener());
         this.listenerDragend = google.maps.event.addDomListener(this.map, 'dragend', this._dragendListener());
-        this.listenerResize = google.maps.event.addDomListener(window, 'resize', this._resizeListener());
+        this.listenerResize = this.addEventListener(window, 'resize', this._resizeListener());
       }
     }, {
       key: 'addMarker',

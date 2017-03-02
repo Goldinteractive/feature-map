@@ -53,8 +53,8 @@ class GoogleMap extends base.features.Feature {
 
   destroy() {
     this.node.innerHTML = ''
-    this.map = null
     google.maps.event.clearInstanceListeners(this.map)
+    this.map = null
 
     super.destroy()
   }
@@ -93,7 +93,7 @@ class GoogleMap extends base.features.Feature {
 
     this.listenerZoomChanged = google.maps.event.addDomListener(this.map, 'zoom_changed', this._zoomChangedListener())
     this.listenerDragend = google.maps.event.addDomListener(this.map, 'dragend', this._dragendListener())
-    this.listenerResize = google.maps.event.addDomListener(window, 'resize', this._resizeListener())
+    this.listenerResize = this.addEventListener(window, 'resize', this._resizeListener())
   }
 
 
