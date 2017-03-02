@@ -1,6 +1,6 @@
 {
   "name": "gi-feature-map",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "Google map with some extensions and additions to simplify usage.",
   "main": "lib/map.js",
   "jsnext:main": "src/index.js",

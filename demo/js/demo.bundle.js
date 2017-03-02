@@ -5282,6 +5282,8 @@ exports.clearImmediate = clearImmediate;
       value: function init() {
         var _this2 = this;
 
+        window.test = this;
+
         this.isResizing = false;
 
         this.markers = [];
@@ -5323,8 +5325,11 @@ exports.clearImmediate = clearImmediate;
     }, {
       key: 'destroy',
       value: function destroy() {
-        _get(GoogleMap.prototype.__proto__ || Object.getPrototypeOf(GoogleMap.prototype), 'destroy', this).call(this);
+        this.node.innerHTML = '';
+        this.map = null;
         google.maps.event.clearInstanceListeners(this.map);
+
+        _get(GoogleMap.prototype.__proto__ || Object.getPrototypeOf(GoogleMap.prototype), 'destroy', this).call(this);
       }
     }, {
       key: '_loadMap',
@@ -5378,7 +5383,7 @@ exports.clearImmediate = clearImmediate;
         var iconUrl;
 
         // extend Google API marker options
-        markerOptions = Object.assign({}, GoogleMap.defaultMarkerOptions.markerOptions, options.markerOptions);
+        markerOptions = Object.assign({}, GoogleMap.defaultMarkerOptions.markerOptions, options.markerOptions || {});
 
         // extend marker options
         options = Object.assign({}, GoogleMap.defaultMarkerOptions, options);

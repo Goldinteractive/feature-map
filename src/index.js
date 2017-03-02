@@ -52,8 +52,11 @@ class GoogleMap extends base.features.Feature {
   }
 
   destroy() {
-    super.destroy()
+    this.node.innerHTML = ''
+    this.map = null
     google.maps.event.clearInstanceListeners(this.map)
+
+    super.destroy()
   }
 
   _loadMap() {
