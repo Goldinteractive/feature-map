@@ -5456,7 +5456,7 @@ exports.clearImmediate = clearImmediate;
         var marker = new google.maps.Marker(markerOptions);
 
         if (options.content) {
-          google.maps.event.addListener(marker, 'click', this._markerClickListener(marker, options.content, options.panTo));
+          google.maps.event.addListener(marker, 'click', this._markerClickListener(marker, options.content, options.panTo, options.open));
         }
 
         this.markers.push(marker);
@@ -5545,8 +5545,14 @@ exports.clearImmediate = clearImmediate;
       }
     }, {
       key: '_markerClickListener',
-      value: function _markerClickListener(marker, content, pan) {
+      value: function _markerClickListener(marker, content, pan, open) {
         var _this7 = this;
+
+        if (open) {
+          this.currentMarker = marker;
+          this.infoWindow.setContent(content);
+          this.infoWindow.open(this.map, marker);
+        }
 
         return function () {
           google.maps.event.addListenerOnce(_this7.map, 'center_changed', _this7.updateCenter.bind(_this7));
@@ -5639,6 +5645,7 @@ exports.clearImmediate = clearImmediate;
   };
 
   GoogleMap.defaultMarkerOptions = {
+    open: false,
     content: null,
     panTo: false,
     scaleIcon: 0.5,

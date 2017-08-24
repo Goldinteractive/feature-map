@@ -118,7 +118,7 @@ class GoogleMap extends base.features.Feature {
     markerOptions.map = this.map
 
     // set position to map center position if no position given
-    markerOptions.position = markerOptions.options || this.initialCenter
+    markerOptions.position = markerOptions.position || this.initialCenter
 
     // set full icon url
     iconUrl = `${base.paths.assets}/features/map/pins/${options.pin}.png`
@@ -185,7 +185,7 @@ class GoogleMap extends base.features.Feature {
 
     if (options.content) {
       google.maps.event.addListener(
-        marker, 'click', this._markerClickListener(marker, options.content, options.panTo)
+        marker, 'click', this._markerClickListener(marker, options.content, options.panTo, options.open)
       )
     }
 
@@ -264,7 +264,13 @@ class GoogleMap extends base.features.Feature {
     }
   }
 
-  _markerClickListener(marker, content, pan) {
+  _markerClickListener(marker, content, pan, open) {
+    if (open) {
+      this.currentMarker = marker
+      this.infoWindow.setContent(content)
+      this.infoWindow.open(this.map, marker)
+    }
+
     return () => {
       google.maps.event.addListenerOnce(this.map, 'center_changed', this.updateCenter.bind(this))
 
@@ -345,6 +351,7 @@ GoogleMap.defaultOptions = {
 }
 
 GoogleMap.defaultMarkerOptions = {
+  open: false,
   content: null,
   panTo: false,
   scaleIcon: 0.5,
