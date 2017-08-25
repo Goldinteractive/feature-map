@@ -266,9 +266,11 @@ class GoogleMap extends base.features.Feature {
 
   _markerClickListener(marker, content, pan, open) {
     if (open) {
-      this.currentMarker = marker
-      this.infoWindow.setContent(content)
-      this.infoWindow.open(this.map, marker)
+      this.one('firstIdle', () => {
+        this.currentMarker = marker
+        this.infoWindow.setContent(content)
+        this.infoWindow.open(this.map, marker)
+      })
     }
 
     return () => {

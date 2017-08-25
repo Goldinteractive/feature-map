@@ -5390,7 +5390,7 @@ exports.clearImmediate = clearImmediate;
         markerOptions.map = this.map;
 
         // set position to map center position if no position given
-        markerOptions.position = markerOptions.options || this.initialCenter;
+        markerOptions.position = markerOptions.position || this.initialCenter;
 
         // set full icon url
         iconUrl = base.paths.assets + '/features/map/pins/' + options.pin + '.png';
@@ -5549,9 +5549,11 @@ exports.clearImmediate = clearImmediate;
         var _this7 = this;
 
         if (open) {
-          this.currentMarker = marker;
-          this.infoWindow.setContent(content);
-          this.infoWindow.open(this.map, marker);
+          this.one('firstIdle', function () {
+            _this7.currentMarker = marker;
+            _this7.infoWindow.setContent(content);
+            _this7.infoWindow.open(_this7.map, marker);
+          });
         }
 
         return function () {
@@ -6250,6 +6252,7 @@ module.exports = g;
     geolocationControl: true,
     geolocationControlZoom: 8,
     markers: [{
+      open: true,
       content: 'Main Marker',
       markerOptions: {
         title: 'Click me'

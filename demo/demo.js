@@ -7,6 +7,7 @@ base.features.add('map', Map, {
   geolocationControlZoom: 8,
   markers: [
     {
+      open: true,
       content: 'Main Marker',
       markerOptions: {
         title: 'Click me'
