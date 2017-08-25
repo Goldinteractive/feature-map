@@ -5283,6 +5283,7 @@ exports.clearImmediate = clearImmediate;
         var _this2 = this;
 
         this.isResizing = false;
+        this.isDraging = false;
 
         this.markers = [];
         this.currentMarker = null;
@@ -5356,6 +5357,7 @@ exports.clearImmediate = clearImmediate;
         }
 
         this.listenerFirstIdle = google.maps.event.addDomListenerOnce(this.map, 'idle', this._firstIdleListener());
+        this.listenerIdle = google.maps.event.addDomListener(this.map, 'idle', this._idleListener());
 
         this.options.markers.forEach(function (marker) {
           _this3.addMarker(marker);
@@ -5366,6 +5368,7 @@ exports.clearImmediate = clearImmediate;
         });
 
         this.listenerZoomChanged = google.maps.event.addDomListener(this.map, 'zoom_changed', this._zoomChangedListener());
+        this.listenerDragstart = google.maps.event.addDomListener(this.map, 'dragstart', this._dragstartListener());
         this.listenerDragend = google.maps.event.addDomListener(this.map, 'dragend', this._dragendListener());
         this.listenerResize = this.addEventListener(window, 'resize', this._resizeListener());
       }
@@ -5557,8 +5560,6 @@ exports.clearImmediate = clearImmediate;
         }
 
         return function () {
-          google.maps.event.addListenerOnce(_this7.map, 'center_changed', _this7.updateCenter.bind(_this7));
-
           if (_this7.currentMarker != marker) {
             _this7.currentMarker = marker;
             _this7.infoWindow.setContent(content);
@@ -5576,34 +5577,56 @@ exports.clearImmediate = clearImmediate;
         };
       }
     }, {
-      key: '_zoomChangedListener',
-      value: function _zoomChangedListener() {
+      key: '_idleListener',
+      value: function _idleListener() {
         var _this8 = this;
 
         return function (e) {
-          _this8.updateCenter();
-          _this8.trigger('zoomChanged');
+          if (!_this8.draging) {
+            _this8.updateCenter();
+          }
+
+          _this8.trigger('idle');
+        };
+      }
+    }, {
+      key: '_zoomChangedListener',
+      value: function _zoomChangedListener() {
+        var _this9 = this;
+
+        return function (e) {
+          _this9.trigger('zoomChanged');
+        };
+      }
+    }, {
+      key: '_dragstartListener',
+      value: function _dragstartListener() {
+        var _this10 = this;
+
+        return function (e) {
+          _this10.isDraging = true;
+          _this10.trigger('dragstart');
         };
       }
     }, {
       key: '_dragendListener',
       value: function _dragendListener() {
-        var _this9 = this;
+        var _this11 = this;
 
         return function (e) {
-          _this9.updateCenter();
-          _this9.trigger('dragend');
+          _this11.isDraging = false;
+          _this11.trigger('dragend');
         };
       }
     }, {
       key: '_resizeListener',
       value: function _resizeListener() {
-        var _this10 = this;
+        var _this12 = this;
 
         return function (e) {
-          if (!_this10.isResizing) {
-            _this10.isResizing = true;
-            base.utils.fn.rAF(_this10.resize.bind(_this10));
+          if (!_this12.isResizing) {
+            _this12.isResizing = true;
+            base.utils.fn.rAF(_this12.resize.bind(_this12));
           }
         };
       }
@@ -6253,7 +6276,7 @@ module.exports = g;
     geolocationControlZoom: 8,
     markers: [{
       open: true,
-      content: 'Main Marker',
+      content: 'Main Marker<br>Test<br>Test',
       markerOptions: {
         title: 'Click me'
       }

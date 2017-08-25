@@ -8,7 +8,7 @@ base.features.add('map', Map, {
   markers: [
     {
       open: true,
-      content: 'Main Marker',
+      content: 'Main Marker<br>Test<br>Test',
       markerOptions: {
         title: 'Click me'
       }

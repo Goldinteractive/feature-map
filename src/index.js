@@ -11,6 +11,7 @@ class GoogleMap extends base.features.Feature {
   init() {
 
     this.isResizing = false
+    this.isDraging = false
 
     this.markers = []
     this.currentMarker = null
@@ -82,6 +83,7 @@ class GoogleMap extends base.features.Feature {
     }
 
     this.listenerFirstIdle = google.maps.event.addDomListenerOnce(this.map, 'idle', this._firstIdleListener())
+    this.listenerIdle = google.maps.event.addDomListener(this.map, 'idle', this._idleListener())
 
     this.options.markers.forEach((marker) => {
       this.addMarker(marker)
@@ -92,6 +94,7 @@ class GoogleMap extends base.features.Feature {
     })
 
     this.listenerZoomChanged = google.maps.event.addDomListener(this.map, 'zoom_changed', this._zoomChangedListener())
+    this.listenerDragstart = google.maps.event.addDomListener(this.map, 'dragstart', this._dragstartListener())
     this.listenerDragend = google.maps.event.addDomListener(this.map, 'dragend', this._dragendListener())
     this.listenerResize = this.addEventListener(window, 'resize', this._resizeListener())
   }
@@ -274,8 +277,6 @@ class GoogleMap extends base.features.Feature {
     }
 
     return () => {
-      google.maps.event.addListenerOnce(this.map, 'center_changed', this.updateCenter.bind(this))
-
       if (this.currentMarker != marker) {
         this.currentMarker = marker
         this.infoWindow.setContent(content)
@@ -293,16 +294,32 @@ class GoogleMap extends base.features.Feature {
     }
   }
 
+  _idleListener() {
+    return (e) => {
+      if (!this.draging) {
+        this.updateCenter()
+      }
+
+      this.trigger('idle')
+    }
+  }
+
   _zoomChangedListener() {
     return (e) => {
-      this.updateCenter()
       this.trigger('zoomChanged')
+    }
+  }
+
+  _dragstartListener() {
+    return (e) => {
+      this.isDraging = true
+      this.trigger('dragstart')
     }
   }
 
   _dragendListener() {
     return (e) => {
-      this.updateCenter()
+      this.isDraging = false
       this.trigger('dragend')
     }
   }
