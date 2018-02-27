@@ -151,7 +151,7 @@ class GoogleMap extends base.features.Feature {
 
         markerOptions.icon = {}
         markerOptions.icon.url = iconUrl
-        markerOptions.icon.size = new google.maps.Size(markerWidth, markerHeight)
+        markerOptions.icon.size = new google.maps.Size(markerWidthScaled, markerHeightScaled)
         markerOptions.icon.scaledSize = new google.maps.Size(markerWidthScaled, markerHeightScaled)
         markerOptions.icon.anchor = new google.maps.Point(markerWidthScaled / 2, markerHeightScaled)
         markerOptions.icon.origin = new google.maps.Point(0, 0)
