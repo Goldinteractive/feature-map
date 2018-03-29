@@ -10,6 +10,7 @@ CONFIG_PATH=./.config
 WEBPACK=$(NODE_MODULES)/.bin/webpack
 POSTCSS=$(NODE_MODULES)/.bin/postcss
 ESLINT=$(NODE_MODULES)/.bin/eslint
+JSDOC=$(NODE_MODULES)/.bin/jsdoc
 BROWSERSYNC=$(NODE_MODULES)/.bin/browser-sync
 
 WEBPACK_CONFIG=$(CONFIG_PATH)/webpack.js
@@ -27,7 +28,7 @@ DEV_CSS_PATH=$(DEV_PATH)/css
 DEV_JS_PATH=$(DEV_PATH)/js
 
 
-publish: jsdoc build
+publish: $(JSDOC) build
 	@ npm publish
 
 build: test js js-minified css
@@ -52,7 +53,7 @@ js-minified:
 
 jsdoc:
 	# generate js documentation
-	@ jsdoc -r \
+	@ $(JSDOC) -r \
 		-R README.md \
 		-c $(JSDOC_CONFIG) \
 		-d $(DOCS_PATH) \
