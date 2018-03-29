@@ -97,6 +97,8 @@ class GoogleMap extends base.features.Feature {
     this.listenerDragstart = google.maps.event.addDomListener(this.map, 'dragstart', this._dragstartListener())
     this.listenerDragend = google.maps.event.addDomListener(this.map, 'dragend', this._dragendListener())
     this.listenerResize = this.addEventListener(window, 'resize', this._resizeListener())
+
+    this.trigger('loaded')
   }
 
 
